@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AI Influencer Generator PRO</title>
+<title>AI Influencer Prompt Generator</title>
 
 <style>
 
@@ -65,12 +65,11 @@ cursor:pointer;
 
 </head>
 
-
 <body>
 
 <div class="container">
 
-<h1>AI Influencer Prompt Generator PRO</h1>
+<h1>AI Influencer Prompt Generator</h1>
 
 <div class="grid">
 
@@ -126,6 +125,7 @@ cursor:pointer;
 <script src="db/outfits.js"></script>
 <script src="db/hooks.js"></script>
 
+
 <script>
 
 function fillSelect(id,data){
@@ -136,8 +136,8 @@ data.forEach(v=>{
 
 let opt=document.createElement("option")
 
-opt.value=v.name || v
-opt.textContent=v.name || v
+opt.value=v
+opt.textContent=v
 
 select.appendChild(opt)
 
@@ -153,16 +153,32 @@ fillSelect("outfit",outfits)
 fillSelect("hook",hooks)
 
 
-characters.forEach(c=>{
+
+function fillCharacters(){
+
+const select=document.getElementById("character")
+
+characters.forEach((c,index)=>{
 
 let opt=document.createElement("option")
 
 opt.value=c.name
-opt.textContent=c.name+" ("+c.country+")"
+opt.textContent=c.name
 
-document.getElementById("character").appendChild(opt)
+if(c.country==="South Korea"){
+
+opt.selected=true
+
+}
+
+select.appendChild(opt)
 
 })
+
+}
+
+fillCharacters()
+
 
 
 function getCharacter(name){
@@ -172,11 +188,11 @@ return characters.find(c=>c.name===name)
 }
 
 
+
 function generateJSON(){
 
-const characterName=document.getElementById("character").value
-
-const char=getCharacter(characterName)
+const charName=document.getElementById("character").value
+const char=getCharacter(charName)
 
 const brand=document.getElementById("brand").value
 const pose=document.getElementById("pose").value
@@ -188,19 +204,7 @@ const hook=document.getElementById("hook").value
 
 const result={
 
-character:{
-name:char.name,
-country:char.country,
-hair_color:char.hair_color,
-hair_style:char.hair_style,
-skin_tone:char.skin_tone,
-eye_color:char.eye_color,
-face_shape:char.face_shape,
-height:char.height,
-body_type:char.body_type,
-makeup_style:char.makeup_style,
-niche:char.niche
-},
+character:char,
 
 scene:{
 location:location,
@@ -217,7 +221,7 @@ hook:hook,
 
 prompt:
 
-`${hook}. ${char.name}, a ${char.country} influencer with ${char.hair_color} ${char.hair_style}, ${char.skin_tone}, ${char.eye_color}, ${char.face_shape}. Wearing ${outfit} from ${brand}. Pose: ${pose}. Scene at ${location}. ${car !== "none" ? "A "+car+" parked nearby." : ""} Cinematic ultra realistic influencer video.`
+`${hook}. ${char.name}, a ${char.country} influencer with ${char.hair_color} ${char.hair_style}, ${char.skin_tone}, ${char.eye_color}, ${char.face_shape}. Wearing ${outfit} from ${brand}. Pose: ${pose}. Scene at ${location}. ${car!=="none" ? "A "+car+" nearby." : ""} Cinematic ultra realistic influencer video.`
 
 }
 
