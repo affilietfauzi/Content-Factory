@@ -9,29 +9,22 @@
 <style>
 
 body{
-font-family:Inter,Arial;
+font-family:Arial;
 background:linear-gradient(135deg,#020617,#0f172a);
-color:#e5e7eb;
-margin:0;
+color:white;
 padding:30px
 }
 
 .container{
-max-width:1300px;
+max-width:1100px;
 margin:auto
-}
-
-h1{
-font-size:34px;
-margin-bottom:6px
 }
 
 .card{
 background:#111827;
 padding:24px;
-border-radius:18px;
-margin-bottom:20px;
-box-shadow:0 25px 50px rgba(0,0,0,0.6)
+border-radius:16px;
+margin-bottom:20px
 }
 
 label{
@@ -40,46 +33,34 @@ margin-top:12px;
 font-weight:bold
 }
 
-select,button,input{
+select,button{
 width:100%;
 padding:10px;
 margin-top:8px;
-border-radius:10px;
-border:none;
-font-size:14px
+border-radius:8px;
+border:none
 }
 
-select,input{
+select{
 background:#1e293b;
 color:white
 }
 
 button{
-cursor:pointer;
-background:linear-gradient(90deg,#2563eb,#9333ea);
-color:white
+background:#2563eb;
+color:white;
+cursor:pointer
 }
-
-.random{background:#f59e0b}
-.copy{background:#10b981}
-.export{background:#0ea5e9}
 
 textarea{
 width:100%;
-height:450px;
+height:350px;
 margin-top:10px;
 background:#020617;
 color:#22c55e;
-border-radius:10px;
-padding:12px;
 border:none;
-font-family:monospace
-}
-
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px
+padding:10px;
+border-radius:10px
 }
 
 </style>
@@ -91,180 +72,157 @@ gap:20px
 <div class="container">
 
 <h1>AI Viral Content Factory ULTRA PRO</h1>
-<p>Generate viral luxury influencer scenes for AI video generation.</p>
-
-
-<div class="grid">
 
 <div class="card">
 
-<label>Top Clothing</label>
-<select id="top">
-<option>a designer crop top</option>
-<option>a luxury silk blouse</option>
-<option>a high fashion blazer</option>
-<option>a luxury streetwear hoodie</option>
-<option>a glamorous evening top</option>
-<option>a luxury fashion jacket</option>
-</select>
+<label>Supermodel Character</label>
+<select id="model"></select>
 
 
-<label>Bottom Clothing</label>
-<select id="bottom">
-<option>designer denim shorts</option>
-<option>luxury leather pants</option>
-<option>high waist fashion jeans</option>
-<option>a stylish mini skirt</option>
-<option>luxury evening skirt</option>
-<option>luxury tailored trousers</option>
-</select>
+<label>Outfit Style</label>
+<select id="outfit"></select>
 
 
 <label>Luxury Brand</label>
-<select id="brand"></select>
+<select id="brand">
+<option value="random">Random Brand</option>
+</select>
+
 
 <label>Accessories</label>
 <select id="accessories">
-<option>luxury sunglasses</option>
-<option>a designer handbag</option>
-<option>a luxury diamond necklace</option>
-<option>a premium luxury watch</option>
-<option>designer handbag and sunglasses</option>
 <option>none</option>
+<option>luxury sunglasses</option>
+<option>designer handbag</option>
+<option>diamond necklace</option>
+<option>luxury watch</option>
 </select>
 
 
 <label>Supermodel Pose</label>
-<select id="pose"></select>
-
-
-<label>Expression</label>
-<select id="expression">
-<option>smiling confidently</option>
-<option>laughing happily</option>
-<option>looking surprised</option>
-<option>posing stylishly</option>
-<option>luxury influencer confident face</option>
+<select id="pose">
+<option value="random">Random Pose</option>
 </select>
 
 
 <label>Luxury Location</label>
-<select id="location"></select>
-
-<label>Supercar</label>
-<select id="car"></select>
-
-</div>
-
-
-<div class="card">
-
-<label>Camera Movement</label>
-<select id="camera">
-<option>a handheld influencer selfie camera</option>
-<option>a smooth cinematic tracking shot</option>
-<option>a dramatic cinematic orbit camera</option>
-<option>a luxury commercial camera</option>
-<option>a drone cinematic shot</option>
-<option>a slow motion fashion camera</option>
+<select id="location">
+<option value="random">Random Location</option>
 </select>
 
 
-<label>Shot Composition</label>
-<select id="shot">
-<option>close-up influencer selfie</option>
-<option>medium influencer vlog</option>
-<option>wide cinematic luxury shot</option>
-<option>epic drone wide shot</option>
+<label>Supercar</label>
+<select id="car">
+<option>none</option>
+<option>Lamborghini Aventador</option>
+<option>Ferrari SF90</option>
+<option>Bugatti Chiron</option>
+<option>Rolls Royce Phantom</option>
+<option>McLaren P1</option>
+<option>Koenigsegg Jesko</option>
+</select>
+
+
+<label>Camera</label>
+<select id="camera">
+<option>cinematic tracking shot</option>
+<option>influencer selfie camera</option>
+<option>drone cinematic shot</option>
 </select>
 
 
 <label>Lighting</label>
 <select id="lighting">
 <option>golden sunset lighting</option>
-<option>bright luxury commercial lighting</option>
+<option>luxury daylight</option>
 <option>soft city night lights</option>
-<option>bright luxury daylight</option>
-<option>dramatic neon luxury lighting</option>
 </select>
 
 
-<label>Video Duration</label>
-<select id="duration">
-<option>5</option>
-<option>8</option>
-<option>12</option>
-<option>15</option>
-</select>
-
-
-<label>Visual Style</label>
-<select id="style">
-<option>luxury influencer cinematic</option>
-<option>high end luxury commercial</option>
-<option>fashion influencer vlog</option>
-<option>luxury documentary style</option>
-</select>
-
-
-<label>Viral Hook</label>
-<select id="hook"></select>
-
-
-<button onclick="generateJSON()">Generate Prompt</button>
-<button class="random" onclick="autoScene()">🎲 Auto Scene</button>
-<button onclick="generateMultiple()">Generate 10 Prompts</button>
-
-</div>
+<button onclick="generatePrompt()">Generate Prompt</button>
 
 </div>
 
 
 <div class="card">
 
-<label>Generated Prompt JSON</label>
+<label>Generated Prompt</label>
 <textarea id="output"></textarea>
 
-<button class="copy" onclick="copyJSON()">Copy</button>
-<button class="export" onclick="exportJSON()">Export JSON</button>
-<button class="export" onclick="exportTXT()">Export TXT</button>
+<button onclick="copy()">Copy</button>
 
 </div>
 
-
 </div>
-
 
 
 <script>
 
+const models=[
 
-const brands=[]
-for(let i=1;i<=1000;i++){
-brands.push("Luxury Brand "+i)
-}
+{name:"Sophia Rossi",country:"Italy"},
+{name:"Emma Johansson",country:"Sweden"},
+{name:"Isabella Martinez",country:"Spain"},
+{name:"Ava Thompson",country:"USA"},
+{name:"Mia Dubois",country:"France"},
+{name:"Lena Schneider",country:"Germany"},
+{name:"Yuki Tanaka",country:"Japan"},
+{name:"Aria Rahimi",country:"UAE"},
+{name:"Soo Min Park",country:"South Korea"},
+{name:"Camila Silva",country:"Brazil"},
+{name:"Anya Petrova",country:"Russia"},
+{name:"Nina Novak",country:"Poland"},
+{name:"Clara Fischer",country:"Austria"},
+{name:"Lara Costa",country:"Portugal"},
+{name:"Zara Khan",country:"Pakistan"},
+{name:"Sara Andersson",country:"Norway"},
+{name:"Emily Clark",country:"Canada"},
+{name:"Valeria Romano",country:"Italy"},
+{name:"Daria Ivanova",country:"Ukraine"},
+{name:"Keiko Sato",country:"Japan"}
 
-const poses=[]
-for(let i=1;i<=250;i++){
-poses.push("high fashion supermodel pose "+i)
-}
-
-const hooks=[]
-for(let i=1;i<=150;i++){
-hooks.push("viral luxury lifestyle hook "+i)
-}
-
-const cars=[
-"Lamborghini Aventador","Ferrari SF90","Bugatti Chiron","McLaren P1","Rolls Royce Phantom",
-"Rolls Royce Cullinan","Bentley Continental GT","Koenigsegg Jesko","Pagani Huayra",
-"Porsche 911 Turbo","Aston Martin Valkyrie","Rimac Nevera"
 ]
 
-const locations=[]
-for(let i=1;i<=200;i++){
-locations.push("luxury influencer location "+i)
-}
 
+const outfits=[
+
+"luxury summer dress",
+"elegant bodycon evening dress",
+"designer bikini with luxury beach cover-up",
+"luxury silk robe outfit",
+"stylish mini dress",
+"fashion influencer crop top with mini skirt",
+"luxury resort wear outfit",
+"high fashion beach outfit",
+"luxury influencer casual summer outfit",
+"designer swimsuit with elegant wrap skirt"
+
+]
+
+
+const brands=["Gucci","Louis Vuitton","Prada","Chanel","Dior","Versace","Balenciaga"]
+
+
+const poses=[
+"walking like a runway supermodel",
+"posing with hand on hip",
+"luxury influencer selfie pose",
+"leaning against balcony",
+"slow motion fashion walk"
+]
+
+
+const locations=[
+
+"luxury penthouse bedroom",
+"luxury bedroom with panoramic city view",
+"glass balcony overlooking city skyline",
+"luxury balcony at sunset",
+"Dubai Marina skyline",
+"Beverly Hills luxury street",
+"Monaco harbor with yachts"
+
+]
 
 
 function fillSelect(id,data){
@@ -272,177 +230,81 @@ function fillSelect(id,data){
 const select=document.getElementById(id)
 
 data.forEach(v=>{
-let o=document.createElement("option")
-o.value=v
-o.textContent=v
-select.appendChild(o)
+
+let opt=document.createElement("option")
+
+if(typeof v=="object"){
+opt.value=v.name+" from "+v.country
+opt.textContent=v.name+" ("+v.country+")"
+}
+else{
+opt.value=v
+opt.textContent=v
+}
+
+select.appendChild(opt)
+
 })
 
 }
 
+
+fillSelect("model",models)
+fillSelect("outfit",outfits)
 fillSelect("brand",brands)
 fillSelect("pose",poses)
-fillSelect("hook",hooks)
-fillSelect("car",cars)
 fillSelect("location",locations)
 
 
 
-function viralScore(){
-
-let score=Math.floor(Math.random()*30)+70
-return score
-
+function random(arr){
+return arr[Math.floor(Math.random()*arr.length)]
 }
 
 
-function optimizePrompt(prompt){
+function generatePrompt(){
 
-const extras=[
+let brand=document.getElementById("brand").value
+if(brand=="random") brand=random(brands)
 
-"ultra realistic",
-"cinematic lighting",
-"luxury influencer aesthetic",
-"high fashion editorial",
-"4K ultra detailed",
-"professional depth of field",
-"viral TikTok aesthetic",
-"cinematic luxury atmosphere"
+let pose=document.getElementById("pose").value
+if(pose=="random") pose=random(poses)
 
-]
-
-return prompt+", "+extras[Math.floor(Math.random()*extras.length)]
-
-}
+let location=document.getElementById("location").value
+if(location=="random") location=random(locations)
 
 
-
-function generateJSON(){
-
-const hook=document.getElementById("hook").value
-const pose=document.getElementById("pose").value
-const brand=document.getElementById("brand").value
-const top=document.getElementById("top").value
-const bottom=document.getElementById("bottom").value
+const model=document.getElementById("model").value
+const outfit=document.getElementById("outfit").value
 const accessories=document.getElementById("accessories").value
-const expression=document.getElementById("expression").value
-const location=document.getElementById("location").value
 const car=document.getElementById("car").value
 const camera=document.getElementById("camera").value
-const shot=document.getElementById("shot").value
 const lighting=document.getElementById("lighting").value
-const duration=document.getElementById("duration").value
-const style=document.getElementById("style").value
 
 
-let prompt=`${hook}. Cinematic ${shot} video of a luxury influencer ${expression} ${pose}, wearing ${top} and ${bottom}, showing ${brand} and ${accessories}. Scene set in ${location}. A ${car} appears prominently in the background. Camera movement ${camera}. Lighting ${lighting}.`
+let prompt=`Cinematic luxury influencer video of ${model}, wearing ${outfit} from ${brand}, ${pose}. Accessories: ${accessories}. Scene set in ${location}.`
 
-prompt=optimizePrompt(prompt)
-
-
-
-const json={
-
-metadata:{
-tool:"AI Viral Content Factory ULTRA PRO"
-},
-
-viral_hook:hook,
-
-viral_score:viralScore(),
-
-video_prompt:prompt,
-
-technical_specs:{
-resolution:"4K",
-aspect_ratio:"9:16",
-fps:"30",
-duration_seconds:Number(duration),
-style:style
+if(car!="none"){
+prompt+=` A ${car} appears in the background.`
 }
 
-}
+prompt+=` Camera style: ${camera}. Lighting: ${lighting}. Ultra realistic luxury lifestyle.`
 
-document.getElementById("output").value=
-JSON.stringify(json,null,2)
+
+document.getElementById("output").value=prompt
 
 }
 
 
+function copy(){
 
-function autoScene(){
-
-const selects=document.querySelectorAll("select")
-
-selects.forEach(s=>{
-s.selectedIndex=Math.floor(Math.random()*s.options.length)
-})
-
-generateJSON()
-
-}
-
-
-
-function generateMultiple(){
-
-let arr=[]
-
-for(let i=0;i<10;i++){
-
-autoScene()
-
-arr.push(JSON.parse(document.getElementById("output").value))
-
-}
-
-document.getElementById("output").value=
-JSON.stringify(arr,null,2)
-
-}
-
-
-
-function copyJSON(){
-
-const text=document.getElementById("output").value
-
-navigator.clipboard.writeText(text)
+navigator.clipboard.writeText(
+document.getElementById("output").value
+)
 
 alert("Copied")
 
 }
-
-
-
-function downloadFile(content,name){
-
-const blob=new Blob([content],{type:"text/plain"})
-
-const a=document.createElement("a")
-
-a.href=URL.createObjectURL(blob)
-
-a.download=name
-
-a.click()
-
-}
-
-
-
-function exportJSON(){
-
-downloadFile(document.getElementById("output").value,"viral_prompt.json")
-
-}
-
-function exportTXT(){
-
-downloadFile(document.getElementById("output").value,"viral_prompt.txt")
-
-}
-
 
 </script>
 
