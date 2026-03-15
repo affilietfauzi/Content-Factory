@@ -6,79 +6,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AI Influencer Video Prompt Generator</title>
+<title>AI Influencer Generator PRO</title>
 
 <style>
 
 body{
-font-family:Arial, Helvetica, sans-serif;
-background:linear-gradient(135deg,#020617,#0f172a);
+background:#0f172a;
 color:white;
+font-family:Arial;
 margin:0;
 padding:30px;
 }
 
 .container{
-max-width:1100px;
+max-width:1200px;
 margin:auto;
 }
 
-h1{
-margin-bottom:5px;
-}
-
 .card{
-background:#111827;
-padding:24px;
-border-radius:16px;
-margin-bottom:20px;
-box-shadow:0 10px 30px rgba(0,0,0,0.5);
-}
-
-label{
-display:block;
-margin-top:12px;
-font-weight:bold;
-}
-
-select,button{
-width:100%;
-padding:10px;
-margin-top:8px;
-border-radius:8px;
-border:none;
-font-size:14px;
-}
-
-select{
 background:#1e293b;
-color:white;
-}
-
-button{
-background:#2563eb;
-color:white;
-cursor:pointer;
-}
-
-.random{
-background:#f59e0b;
-}
-
-.copy{
-background:#10b981;
-}
-
-textarea{
-width:100%;
-height:360px;
-margin-top:10px;
-background:#020617;
-color:#22c55e;
-border:none;
-padding:12px;
-border-radius:10px;
-font-family:monospace;
+padding:20px;
+border-radius:12px;
+margin-bottom:20px;
 }
 
 .grid{
@@ -87,17 +36,41 @@ grid-template-columns:1fr 1fr;
 gap:20px;
 }
 
+select,button{
+width:100%;
+padding:10px;
+margin-top:8px;
+border-radius:8px;
+border:none;
+}
+
+textarea{
+width:100%;
+height:350px;
+background:black;
+color:#22c55e;
+font-family:monospace;
+padding:15px;
+border-radius:10px;
+border:none;
+}
+
+button{
+background:#2563eb;
+color:white;
+cursor:pointer;
+}
+
 </style>
 
 </head>
+
 
 <body>
 
 <div class="container">
 
-<h1>AI Influencer Video Prompt Generator</h1>
-<p>Create cinematic influencer prompts for AI video tools.</p>
-
+<h1>AI Influencer Prompt Generator PRO</h1>
 
 <div class="grid">
 
@@ -106,96 +79,30 @@ gap:20px;
 <label>Influencer Character</label>
 <select id="character"></select>
 
-
 <label>Outfit Style</label>
-<select id="outfit">
-
-<option>luxury summer dress</option>
-<option>elegant bodycon evening dress</option>
-<option>designer bikini with beach cover up</option>
-<option>stylish mini dress</option>
-<option>luxury silk robe outfit</option>
-<option>fashion influencer crop top with mini skirt</option>
-<option>luxury resort outfit</option>
-<option>designer swimsuit with wrap skirt</option>
-
-</select>
-
+<select id="outfit"></select>
 
 <label>Luxury Brand</label>
-<select id="brand">
-<option value="random">Random Brand</option>
-</select>
+<select id="brand"></select>
 
-
-<label>Accessories</label>
-<select id="accessories">
-
-<option>none</option>
-<option>luxury sunglasses</option>
-<option>designer handbag</option>
-<option>diamond necklace</option>
-<option>luxury watch</option>
-
-</select>
-
-
-<label>Supermodel Pose</label>
-<select id="pose">
-
-<option value="random">Random Pose</option>
-
-</select>
+<label>Pose</label>
+<select id="pose"></select>
 
 </div>
 
 
 <div class="card">
 
-<label>Luxury Location</label>
-<select id="location">
-
-<option value="random">Random Location</option>
-
-</select>
-
+<label>Location</label>
+<select id="location"></select>
 
 <label>Supercar</label>
-<select id="car">
+<select id="car"></select>
 
-<option>none</option>
-<option>Lamborghini Aventador</option>
-<option>Ferrari SF90</option>
-<option>Bugatti Chiron</option>
-<option>Rolls Royce Phantom</option>
-<option>McLaren P1</option>
-<option>Koenigsegg Jesko</option>
+<label>Hook</label>
+<select id="hook"></select>
 
-</select>
-
-
-<label>Camera Style</label>
-<select id="camera">
-
-<option>cinematic tracking shot</option>
-<option>influencer selfie camera</option>
-<option>drone cinematic shot</option>
-
-</select>
-
-
-<label>Lighting</label>
-<select id="lighting">
-
-<option>golden sunset lighting</option>
-<option>bright luxury daylight</option>
-<option>soft city night lights</option>
-
-</select>
-
-
-<button onclick="generatePrompt()">Generate Prompt</button>
-<button class="random" onclick="randomScene()">Random Scene</button>
+<button onclick="generateJSON()">Generate JSON</button>
 
 </div>
 
@@ -203,62 +110,23 @@ gap:20px;
 
 
 <div class="card">
-
-<label>Generated Prompt</label>
 
 <textarea id="output"></textarea>
 
-<button class="copy" onclick="copyPrompt()">Copy Prompt</button>
-
 </div>
 
 </div>
 
 
-<!-- LOAD CHARACTER DATABASE -->
-<script src="characters.js"></script>
-
+<script src="db/characters.js"></script>
+<script src="db/brands.js"></script>
+<script src="db/poses.js"></script>
+<script src="db/locations.js"></script>
+<script src="db/cars.js"></script>
+<script src="db/outfits.js"></script>
+<script src="db/hooks.js"></script>
 
 <script>
-
-
-const brands=[
-
-"Gucci",
-"Louis Vuitton",
-"Prada",
-"Chanel",
-"Dior",
-"Versace",
-"Balenciaga",
-"Fendi"
-
-]
-
-
-const poses=[
-
-"walking confidently like a runway model",
-"luxury influencer selfie pose",
-"leaning on balcony with city view",
-"slow motion fashion walk",
-"posing with hand on hip"
-
-]
-
-
-const locations=[
-
-"luxury penthouse bedroom",
-"luxury bedroom with panoramic city window",
-"glass balcony overlooking city skyline",
-"luxury balcony at sunset",
-"Dubai Marina skyline",
-"Beverly Hills luxury street",
-"Monaco harbor with yachts"
-
-]
-
 
 function fillSelect(id,data){
 
@@ -268,126 +136,100 @@ data.forEach(v=>{
 
 let opt=document.createElement("option")
 
-opt.value=v
-opt.textContent=v
+opt.value=v.name || v
+opt.textContent=v.name || v
 
 select.appendChild(opt)
 
 })
 
 }
-
 
 fillSelect("brand",brands)
 fillSelect("pose",poses)
 fillSelect("location",locations)
+fillSelect("car",cars)
+fillSelect("outfit",outfits)
+fillSelect("hook",hooks)
 
 
-
-function fillCharacters(){
-
-const select=document.getElementById("character")
-
-influencerCharacters.forEach(c=>{
+characters.forEach(c=>{
 
 let opt=document.createElement("option")
 
 opt.value=c.name
-
 opt.textContent=c.name+" ("+c.country+")"
 
-select.appendChild(opt)
+document.getElementById("character").appendChild(opt)
 
 })
-
-}
-
-fillCharacters()
-
 
 
 function getCharacter(name){
 
-return influencerCharacters.find(c=>c.name===name)
+return characters.find(c=>c.name===name)
 
 }
 
 
-function random(arr){
+function generateJSON(){
 
-return arr[Math.floor(Math.random()*arr.length)]
+const characterName=document.getElementById("character").value
 
-}
+const char=getCharacter(characterName)
 
-
-
-function generatePrompt(){
-
-let brand=document.getElementById("brand").value
-let pose=document.getElementById("pose").value
-let location=document.getElementById("location").value
-
-if(brand=="random") brand=random(brands)
-if(pose=="random") pose=random(poses)
-if(location=="random") location=random(locations)
-
-
-const charName=document.getElementById("character").value
-const char=getCharacter(charName)
-
-const outfit=document.getElementById("outfit").value
-const accessories=document.getElementById("accessories").value
+const brand=document.getElementById("brand").value
+const pose=document.getElementById("pose").value
+const location=document.getElementById("location").value
 const car=document.getElementById("car").value
-const camera=document.getElementById("camera").value
-const lighting=document.getElementById("lighting").value
+const outfit=document.getElementById("outfit").value
+const hook=document.getElementById("hook").value
 
 
-let description=`${char.name}, an influencer from ${char.country} with ${char.hair_color} ${char.hair_style}, ${char.skin_tone}, ${char.eye_color}, ${char.face_shape}`
+const result={
 
+character:{
+name:char.name,
+country:char.country,
+hair_color:char.hair_color,
+hair_style:char.hair_style,
+skin_tone:char.skin_tone,
+eye_color:char.eye_color,
+face_shape:char.face_shape,
+height:char.height,
+body_type:char.body_type,
+makeup_style:char.makeup_style,
+niche:char.niche
+},
 
-let prompt=`Cinematic influencer video of ${description}. She is wearing ${outfit} from ${brand}. Pose: ${pose}. Accessories: ${accessories}. Scene at ${location}.`
+scene:{
+location:location,
+pose:pose,
+supercar:car
+},
 
+fashion:{
+outfit:outfit,
+brand:brand
+},
 
-if(car!="none"){
+hook:hook,
 
-prompt+=` A ${car} is parked nearby.`
+prompt:
 
-}
-
-
-prompt+=` Camera style: ${camera}. Lighting: ${lighting}. Ultra realistic luxury lifestyle video.`
-
-
-document.getElementById("output").value=prompt
-
-}
-
-
-
-function randomScene(){
-
-document.getElementById("brand").value="random"
-document.getElementById("pose").value="random"
-document.getElementById("location").value="random"
-
-generatePrompt()
-
-}
-
-
-
-function copyPrompt(){
-
-navigator.clipboard.writeText(
-document.getElementById("output").value
-)
-
-alert("Prompt copied")
+`${hook}. ${char.name}, a ${char.country} influencer with ${char.hair_color} ${char.hair_style}, ${char.skin_tone}, ${char.eye_color}, ${char.face_shape}. Wearing ${outfit} from ${brand}. Pose: ${pose}. Scene at ${location}. ${car !== "none" ? "A "+car+" parked nearby." : ""} Cinematic ultra realistic influencer video.`
 
 }
 
+
+document.getElementById("output").value=
+
+JSON.stringify(result,null,2)
+
+}
 
 </script>
 
 </body>
+
 </html>
